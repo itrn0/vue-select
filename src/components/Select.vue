@@ -284,7 +284,7 @@
 </style>
 
 <template>
-  <div :dir="dir" class="dropdown v-select" :class="dropdownClasses">
+  <div :dir="dir" class="dropdown" :class="dropdownClasses">
     <div ref="toggle" @mousedown.prevent="toggleDropdown" :class="['dropdown-toggle', 'clearfix']">
 
       <span class="selected-tag" v-for="option in valueAsArray" v-bind:key="option.index">
@@ -351,6 +351,10 @@
     mixins: [pointerScroll, typeAheadPointer, ajax],
 
     props: {
+      disableNativeStyle: {
+        default: false
+      },
+    
       /**
        * Contains the currently selected value. Very similar to a
        * `value` attribute on an <input>. You can listen for changes
@@ -866,7 +870,8 @@
           unsearchable: !this.searchable,
           loading: this.mutableLoading,
           rtl: this.dir === 'rtl',
-          disabled: this.disabled
+          disabled: this.disabled,
+          'v-select': !this.disableNativeStyle
         }
       },
 
